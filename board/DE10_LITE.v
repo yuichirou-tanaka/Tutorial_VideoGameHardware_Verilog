@@ -90,4 +90,18 @@ module DE10_LITE(
 //  Structural coding
 //=======================================================
 
+`define FPGA_EXAMPLE wrapper_test_hvsync
+
+    `FPGA_EXAMPLE
+    `FPGA_EXAMPLE
+    (
+        .clk    ( clk   ), 
+        .reset  ( reset ), 
+        .keys   ( keys  ),
+        .hsync  ( hsync ), 
+        .vsync  ( vsync ), 
+        .rgb    ( rgb   )
+    );
+
+
 endmodule
