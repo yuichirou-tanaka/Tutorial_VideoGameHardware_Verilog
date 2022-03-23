@@ -11,9 +11,9 @@ module hvsync_generator
 )(
     input wire [0:0] clk,
     input wire reset,
-    output hsync,
-    output vsync,
-    output display_on,
+    output reg hsync,
+    output reg vsync,
+    output wire display_on,
     output  reg     [15 : 0]    hpos,               // horizontal pixel position
     output  reg     [15 : 0]    vpos                // vertical pixel position
 );
