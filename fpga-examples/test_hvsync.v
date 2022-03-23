@@ -18,7 +18,6 @@ module test_hvsync_top
                         display_on && hpos[4]
                     };
     hvsync_generator hvsync_gen(
-    (
         .clk        ( clk           ),
         .reset      ( reset         ),
         .hsync      ( hsync         ),
