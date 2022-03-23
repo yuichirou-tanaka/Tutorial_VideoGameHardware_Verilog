@@ -429,37 +429,10 @@ set_location_assignment PIN_AA2 -to GPIO[35]
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
-set_global_assignment -name VERILOG_FILE DE10_LITE.v
-set_global_assignment -name VERILOG_FILE ../../rtl/wrapper_spritetest.v
-set_global_assignment -name VERILOG_FILE ../../rtl/wrapper_crttest.v
-set_global_assignment -name VERILOG_FILE ../../rtl/wrapper_sprite_rotation.v
-set_global_assignment -name VERILOG_FILE ../../rtl/wrapper_test_hvsync.v
-set_global_assignment -name VERILOG_FILE ../../rtl/wrapper_racing_game.v
-set_global_assignment -name VERILOG_FILE ../../rtl/wrapper_racing_game_cpu.v
-set_global_assignment -name VERILOG_FILE ../../rtl/wrapper_racing_game_v3.v
-set_global_assignment -name VERILOG_FILE ../../rtl/wrapper_racing_game_v2.v
-set_global_assignment -name VERILOG_FILE ../../rtl/wrapper_digit10.v
-set_global_assignment -name VERILOG_FILE ../../rtl/wrapper_starfield.v
-set_global_assignment -name VERILOG_FILE ../../rtl/wrapper_sprite_scanline_renderer.v
-set_global_assignment -name VERILOG_FILE ../../fpga-examples/spritetest.v
-set_global_assignment -name VERILOG_FILE ../../fpga-examples/hvsync_generator.v
-set_global_assignment -name VERILOG_FILE ../../fpga-examples/test_hvsync.v
-set_global_assignment -name VERILOG_FILE ../../fpga-examples/racing_game.v
-set_global_assignment -name VERILOG_FILE ../../fpga-examples/racing_game_v3.v
-set_global_assignment -name VERILOG_FILE ../../fpga-examples/racing_game_v2.v
-set_global_assignment -name VERILOG_FILE ../../fpga-examples/sprite_renderer.v
-set_global_assignment -name VERILOG_FILE ../../fpga-examples/sprite_bitmap.v
-set_global_assignment -name VERILOG_FILE ../../fpga-examples/digits10.v
-set_global_assignment -name VERILOG_FILE ../../fpga-examples/starfield.v
-set_global_assignment -name VERILOG_FILE ../../fpga-examples/lfsr.v
-set_global_assignment -name VERILOG_FILE ../../fpga-examples/crttest.v
-set_global_assignment -name VERILOG_FILE ../../fpga-examples/cpu8.v
-set_global_assignment -name VERILOG_FILE ../../fpga-examples/racing_game_cpu.v
-set_global_assignment -name VERILOG_FILE ../../fpga-examples/sprite_rotation.v
-set_global_assignment -name VERILOG_FILE ../../fpga-examples/sprite_scanline_renderer.v
-set_global_assignment -name SDC_FILE DE10_LITE.SDC
 set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
 set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name VERILOG_FILE DE10_LITE.v
+set_global_assignment -name SDC_FILE DE10_LITE.SDC
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
