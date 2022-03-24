@@ -11,7 +11,9 @@ module ball_absolute_top
     /*******************************************************
     *               WIRE AND REG DECLARATION               *
     *******************************************************/
-    
+    wire display_on;
+    wire [8:0] hpos;
+    wire [8:0] vpos;
     reg [8:0] ball_hpos;
     reg [8:0] ball_vpos;
 
@@ -51,8 +53,8 @@ module ball_absolute_top
     wire ball_vgfx = ball_vdiff < BALL_SIZE;
     wire ball_gfx = ball_hgfx && ball_vgfx;
     
-    wire ball_vert_collide = ball_vpos >= 240 - BALL_SIZE;
-    wire ball_horiz_collide = ball_hpos >= 256 - BALL_SIZE;
+    wire ball_vert_collide = ball_vpos >= 480 - BALL_SIZE;
+    wire ball_horiz_collide = ball_hpos >= 640 - BALL_SIZE;
 
     wire grid_gfx = (((hpos%7)==0) && ((vpos&7)==0));
     wire r = display_on && (ball_hgfx | ball_gfx);

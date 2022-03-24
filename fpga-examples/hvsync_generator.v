@@ -62,7 +62,7 @@ module hvsync_generator
     *******************************************************/
     assign  hmaxxed = hpos == H_MAX;    // set when hpos is maximum // 799
     assign  vmaxxed = vpos == V_MAX;    // set when vpos is maximum // 524
-    assign display_on = ( hpos < H_DISPLAY ) && ( vpos < V_DISPLAY );   // display_on is set when beam is in "safe" visible frame
+    assign display_on = ( hpos < H_DISPLAY ) && ( vpos < V_DISPLAY );   // ディスプレイ上にある
     /*******************************************************
     *               OTHER COMB AND SEQ LOGIC               *
     *******************************************************/
