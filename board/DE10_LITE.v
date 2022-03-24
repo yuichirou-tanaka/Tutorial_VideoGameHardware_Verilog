@@ -91,7 +91,9 @@ module DE10_LITE(
 //=======================================================
 
 //`define FPGA_EXAMPLE wrapper_digits
-`define FPGA_EXAMPLE wrapper_ball_paddle
+//`define FPGA_EXAMPLE wrapper_ball_paddle
+`define FPGA_EXAMPLE wrapper_ball_absolute_top
+
 
     `FPGA_EXAMPLE
     `FPGA_EXAMPLE

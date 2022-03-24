@@ -36,8 +36,29 @@ module ball_absolute_top
 
     always @(posedge ball_vert_collide)
     begin
+        ball_vert_move <= -ball_vert_move;
     end
 
+    always @(posedge ball_horiz_collide)
+    begin
+        ball_horiz_move <= -ball_horiz_move;
+    end
+
+    wire [8:0] ball_hdiff = hpos - ball_hpos;
+    wire [8:0] ball_vdiff = vpos - ball_vpos;
+
+    wire ball_hgfx = ball_hdiff < BALL_SIZE;
+    wire ball_vgfx = ball_vdiff < BALL_SIZE;
+    wire ball_gfx = ball_hgfx && ball_vgfx;
+    
+    wire ball_vert_collide = ball_vpos >= 240 - BALL_SIZE;
+    wire ball_horiz_collide = ball_hpos >= 256 - BALL_SIZE;
+
+    wire grid_gfx = (((hpos%7)==0) && ((vpos&7)==0));
+    wire r = display_on && (ball_hgfx | ball_gfx);
+    wire g = display_on && (ball_gfx | ball_gfx);
+    wire b = display_on && (ball_vgfx | ball_gfx);
+    assign rgb = {b,g,r};
 
     hvsync_generator hvsync_gen    (
         .clk        ( clk           ),
