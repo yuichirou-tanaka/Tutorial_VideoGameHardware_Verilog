@@ -223,13 +223,43 @@ module ball_paddle_top
                 endcase
             end
         end
+    // ball motion: update ball position
     always @(posedge clk, posedge reset)
-        if(reset)
+        if( reset )
         begin
+            // reset ball position to top center
             ball_x <= 320;
             ball_y <= 240;
-        end
-        else if(frame_update)
+        end 
+        else if( frame_update )
         begin
+            // move ball horizontal and vertical position
+            if( ball_dir_x == BALL_DIR_RIGHT )
+                ball_x <= ball_x + ( ball_speed_x ? 1 : 0 ) + 1;
+            else
+                ball_x <= ball_x - ( ball_speed_x ? 1 : 0 ) - 1;
+            ball_y <= ball_y + ( ball_dir_y == BALL_DIR_DOWN ? 1 : -1 );
         end
+
+    always @(*)
+        case(vpos[8:3])
+            0,1,2                   : main_gfx = score_gfx;
+            3                       : main_gfx = 0;
+            4                       : main_gfx = 1;
+            8,9,10,11,12,13,14,15   : main_gfx = brick_gfx;                 // brick rows 1-8
+            28                      : main_gfx = paddle_gfx | lr_border;    // paddle
+            29                      : main_gfx = hpos[0] ^ vpos[0];         // bottom border
+            default                 : main_gfx = lr_border;                 // left/right borders
+        endcase
+
+    hvsync_generator hvsync_gen    (
+        .clk        ( clk           ),
+        .reset      ( reset         ),
+        .hsync      ( hsync         ),
+        .vsync      ( vsync         ),
+        .display_on ( display_on    ),
+        .hpos       ( hpos          ),
+        .vpos       ( vpos          )
+    );
+    
 endmodule // ball_paddle_top
