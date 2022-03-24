@@ -12,10 +12,10 @@ module ball_absolute_top
     *               WIRE AND REG DECLARATION               *
     *******************************************************/
     wire display_on;
-    wire [8:0] hpos;
-    wire [8:0] vpos;
-    reg [8:0] ball_hpos;	// ball current X position
-    reg [8:0] ball_vpos;	// ball current Y position
+    wire [15:0] hpos;
+    wire [15:0] vpos;
+    reg [15:0] ball_hpos;	// ball current X position
+    reg [15:0] ball_vpos;	// ball current Y position
 
     reg [8:0] ball_horiz_move = -2;	// ball current X velocity
     reg [8:0] ball_vert_move = 2;		// ball current Y velocity
@@ -63,8 +63,8 @@ module ball_absolute_top
     end
 
     // offset of ball position from video beam
-    wire [8:0] ball_hdiff = hpos - ball_hpos;
-    wire [8:0] ball_vdiff = vpos - ball_vpos;
+    wire [15:0] ball_hdiff = hpos - ball_hpos;
+    wire [15:0] ball_vdiff = vpos - ball_vpos;
 
     // ball graphics output
     wire ball_hgfx = ball_hdiff < BALL_SIZE;
