@@ -45,12 +45,12 @@ module hvsync_generator
     /*******************************************************
     *                 PARAMS & LOCALPARAMS                 *
     *******************************************************/
-    localparam H_SYNC_START = H_DISPLAY + H_FRONT,
-               H_SYNC_END   = H_DISPLAY + H_FRONT + H_SYNC - 1,
-                H_MAX        = H_DISPLAY + H_BACK + H_FRONT + H_SYNC - 1,
-                V_SYNC_START = V_DISPLAY + V_BOTTOM,
-                V_SYNC_END   = V_DISPLAY + V_BOTTOM + V_SYNC - 1,
-                V_MAX        = V_DISPLAY + V_TOP + V_BOTTOM + V_SYNC - 1;
+    localparam H_SYNC_START = H_DISPLAY + H_FRONT, //656
+               H_SYNC_END   = H_DISPLAY + H_FRONT + H_SYNC - 1, // 751
+                H_MAX        = H_DISPLAY + H_BACK + H_FRONT + H_SYNC - 1,//799
+                V_SYNC_START = V_DISPLAY + V_BOTTOM, // 513
+                V_SYNC_END   = V_DISPLAY + V_BOTTOM + V_SYNC - 1,// 514
+                V_MAX        = V_DISPLAY + V_TOP + V_BOTTOM + V_SYNC - 1; // 524
     /*******************************************************
     *               WIRE AND REG DECLARATION               *
     *******************************************************/
@@ -60,8 +60,8 @@ module hvsync_generator
     /*******************************************************
     *                      ASSIGNMENT                      *
     *******************************************************/
-    assign  hmaxxed = hpos == H_MAX;    // set when hpos is maximum
-    assign  vmaxxed = vpos == V_MAX;    // set when vpos is maximum
+    assign  hmaxxed = hpos == H_MAX;    // set when hpos is maximum // 799
+    assign  vmaxxed = vpos == V_MAX;    // set when vpos is maximum // 524
     assign display_on = ( hpos < H_DISPLAY ) && ( vpos < V_DISPLAY );   // display_on is set when beam is in "safe" visible frame
     /*******************************************************
     *               OTHER COMB AND SEQ LOGIC               *
@@ -75,7 +75,7 @@ module hvsync_generator
     end
     else
     begin
-        hsync <= ~ ( ( hpos >= H_SYNC_START ) && ( hpos <= H_SYNC_END ) );
+        hsync <= ~ ( ( hpos >= H_SYNC_START ) && ( hpos <= H_SYNC_END ) );// 1: 0~655   0:656~751
         if( hmaxxed )
             hpos <= 16'b0;
         else
@@ -90,7 +90,7 @@ module hvsync_generator
     end
     else
     begin
-        vsync <= ~ ( ( vpos >= V_SYNC_START ) && ( vpos <= V_SYNC_END ) );
+        vsync <= ~ ( ( vpos >= V_SYNC_START ) && ( vpos <= V_SYNC_END ) );// 1: 0~512   0:513~514
         if( hmaxxed )
         begin
             if ( vmaxxed )
