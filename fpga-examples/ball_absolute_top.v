@@ -17,8 +17,8 @@ module ball_absolute_top
     reg [15:0] ball_hpos;	// ball current X position
     reg [15:0] ball_vpos;	// ball current Y position
 
-    reg [8:0] ball_horiz_move = -2;	// ball current X velocity
-    reg [8:0] ball_vert_move = 2;		// ball current Y velocity
+    reg [15:0] ball_horiz_move = -2;	// ball current X velocity
+    reg [15:0] ball_vert_move = 2;		// ball current Y velocity
 
     localparam ball_horiz_initial = 64;	// ball initial X position
     localparam ball_vert_initial = 64;	// ball initial Y position
@@ -73,8 +73,8 @@ module ball_absolute_top
 
     // collide with vertical and horizontal boundaries
     // these are set when the ball touches a border
-    wire ball_vert_collide = ball_vpos >= 480 - BALL_SIZE;
-    wire ball_horiz_collide = ball_hpos >= 640 - BALL_SIZE;
+    wire ball_vert_collide = ball_vpos >= (480 - (BALL_SIZE * 2));
+    wire ball_horiz_collide = ball_hpos >= (640 - (BALL_SIZE * 2));
 
     // combine signals to RGB output
     wire grid_gfx = (((hpos&7)==0) && ((vpos&7)==0));
