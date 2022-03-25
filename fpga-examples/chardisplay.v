@@ -73,6 +73,5 @@ module test_ram1_top(
                 ram_writeenable <= 0;
             end
         endcase
-
-
+    
 endmodule // test_ram1_top
