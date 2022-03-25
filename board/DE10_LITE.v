@@ -95,7 +95,7 @@ module DE10_LITE(
 //`define FPGA_EXAMPLE wrapper_ball_absolute_top
 //`define FPGA_EXAMPLE wrapper_ball_slipcounter_top
 // `define FPGA_EXAMPLE wrapper_tiletest
-`define FPGA_EXAMPLE wrapper_switches
+`define FPGA_EXAMPLE wrapper_paddle
 
 
     `FPGA_EXAMPLE
