@@ -9,8 +9,8 @@ module switchs_top
     output [2:0] rgb
 );
     wire display_on;
-    wire [8:0] hpos;
-    wire [8:0] vpos;
+    wire [15:0] hpos;
+    wire [15:0] vpos;
 
     hvsync_generator hvsync_gen(
         .clk(clk),

@@ -6,16 +6,6 @@ module hvsync_generator
      1366x768
 
     */
-
-// NG
-    // parameter                   H_DISPLAY = 256,    // horizontal display width
-    //                             H_BACK    =  23,    // horizontal left border (back porch)
-    //                             H_FRONT   =   7,    // horizontal right border (front porch)
-    //                             H_SYNC    =  23,    // horizontal sync width
-    //                             V_DISPLAY = 240,    // vertical display height
-    //                             V_TOP     =   5,    // vertical top border
-    //                             V_BOTTOM  =  14,    // vertical bottom border
-    //                             V_SYNC    =   3     // vertical sync # lines
     parameter                   H_DISPLAY = 640,    // horizontal display width
                                 H_BACK    =  48,    // horizontal left border (back porch)
                                 H_FRONT   =  16,    // horizontal right border (front porch)
@@ -24,15 +14,6 @@ module hvsync_generator
                                 V_TOP     =  10,    // vertical top border
                                 V_BOTTOM  =  33,    // vertical bottom border
                                 V_SYNC    =   2     // vertical sync # lines
-// NG
-    // parameter                   H_DISPLAY = 1366,    // horizontal display width
-    //                             H_BACK    =  48,    // horizontal left border (back porch)
-    //                             H_FRONT   =  16,    // horizontal right border (front porch)
-    //                             H_SYNC    =  96,    // horizontal sync width
-    //                             V_DISPLAY = 768,    // vertical display height
-    //                             V_TOP     =  10,    // vertical top border
-    //                             V_BOTTOM  =  33,    // vertical bottom border
-    //                             V_SYNC    =   2     // vertical sync # lines
 )(
     input wire [0:0] clk,
     input wire reset,
