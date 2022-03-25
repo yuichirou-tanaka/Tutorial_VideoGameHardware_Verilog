@@ -60,7 +60,7 @@ module tb_220325_tile_test();
     initial
     begin
         frame_c = 0;
-        file = $fopen("../.log", "w");
+        file = $fopen("../log_output.txt", "w");
         fork 
             forever
             begin
