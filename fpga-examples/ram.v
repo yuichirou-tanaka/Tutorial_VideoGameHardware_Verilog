@@ -1,4 +1,5 @@
 
+
 module RAM_sync
 #(
     parameter                   A = 10, // # of address bits

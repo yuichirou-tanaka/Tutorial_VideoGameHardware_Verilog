@@ -15,14 +15,13 @@ module test_ram1_top(
     reg [7:0] ram_write;
     reg ram_writeenable = 0;
 
+    // RAM to hold 32x32 array of bytes
     RAM_sync ram(
         .clk(clk),
-        .reset(reset),
-        .hsync(hsync),
-        .vsync(vsync),
-        .display_on(display_on),
-        .hpos(hpos),
-        .vpos(vpos)
+        .dout(ram_read),
+        .din(ram_write),
+        .addr(ram_addr),
+        .we(ram_writeenable)
     );
 
     hvsync_generator hvsync_gen(
@@ -35,21 +34,21 @@ module test_ram1_top(
         .vpos(vpos)
     );
 
+    wire [4:0] row = vpos[7:3];	// 5-bit row, vpos / 8
+    wire [4:0] col = hpos[7:3];	// 5-bit column, hpos / 8
+    wire [2:0] rom_yofs = vpos[2:0]; // scanline of cell
+    wire [4:0] rom_bits;		   // 5 pixels per scanline
 
-    wire [4:0] row = vpos[7:3];
-    wire [4:0] col = hpos[7:3];
-    wire [4:0] rom_yofs = vpos[2:0];
-    wire [4:0] rom_bits;
+    wire [3:0] digit = ram_read[3:0]; // read digit from RAM
+    wire [2:0] xofs = hpos[2:0];      // which pixel to draw (0-7)
 
-    wire [3:0] digit = ram_read[3:0];
-    wire [2:0] xofs = hpos[2:0];
+    assign ram_addr = {row,col};	// 10-bit RAM address
 
-    assign ram_addr = {row, col};
-
-    digit10_case numbers(
+    // digits ROM
+    digits10_case numbers(
         .digit(digit),
-        .yofs(ram_yofs),
-        .bits(ram_bits)
+        .yofs(rom_yofs),
+        .bits(rom_bits)
     );
 
     wire r = display_on && 0;
