@@ -1,5 +1,5 @@
 module car_bitmap(
-    input wire [2:0] yofs,
+    input wire [3:0] yofs,
     output wire [7:0] bits
 );
     reg [7:0] bitarray[0:15];
@@ -44,8 +44,8 @@ module sprite_bitmap_top
     reg [3:0] car_sprite_yofs;
     wire [7:0] car_sprite_bits;
 
-    reg [8:0] player_x = 128;
-    reg [8:0] player_y = 128;
+    reg [15:0] player_x = 128;
+    reg [15:0] player_y = 128;
 
     hvsync_generator hvsync_gen(
         .clk(clk),
@@ -76,6 +76,7 @@ module sprite_bitmap_top
         car_sprite_xofs <= car_sprite_xofs - 1;
 
     // mirror sprite in X direction
+    // 7:0 なので0~7の値
     wire [3:0] car_bit = car_sprite_xofs>=8 ? 
                                     15-car_sprite_xofs:
                                     car_sprite_xofs;
