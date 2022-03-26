@@ -84,12 +84,12 @@ module sprite_render_test_top(
     wire [15:0] vpos;
 
     // player position
-    reg [15:0] player_x;
-    reg [15:0] player_y;
+    reg [14:0] player_x;
+    reg [14:0] player_y;
     
     // paddle position
-    reg [15:0] paddle_x;
-    reg [15:0] paddle_y;
+    reg [14:0] paddle_x;
+    reg [14:0] paddle_y;
 
     // video sync generator
     hvsync_generator hvsync_gen(
@@ -131,10 +131,10 @@ module sprite_render_test_top(
 
     // measure paddle position
     always @(posedge hpaddle)
-    paddle_x <= vpos[7:0];
+    paddle_x <= vpos[14:0];
 
     always @(posedge vpaddle)
-    paddle_y <= vpos[7:0];
+    paddle_y <= vpos[14:0];
 
     always @(posedge vsync)
     begin
