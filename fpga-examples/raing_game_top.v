@@ -37,43 +37,60 @@ module raing_game_top
   
     // set paddle registers
     always @(posedge hsync)
-    begin
+        begin
         if (!hpaddle) paddle_x <= vpos[7:0];
         if (!vpaddle) paddle_y <= vpos[7:0];
-    end
+        end
 
-    wire player_load = (hpos>=256) && (hpos < 260);
+
+    // select player or enemy access to ROM
+    wire player_load = (hpos >= 256) && (hpos < 260);
     wire enemy_load = (hpos >= 260);
-
+    // wire up car sprite ROM
+    // multiplex between player and enemy ROM address
     wire [3:0] player_sprite_yofs;
     wire [3:0] enemy_sprite_yofs;
-    wire [3:0] car_sprite_yofs = player_load ? player_sprite_yofs : enemy_sprite_yofs;
-    wire [7:0] car_sprite_bits;
-
+    wire [3:0] car_sprite_yofs = player_load ? player_sprite_yofs : enemy_sprite_yofs;  
+    wire [7:0] car_sprite_bits;  
     car_bitmap car(
-    .yofs(car_sprite_yofs), 
-    .bits(car_sprite_bits));
+        .yofs(car_sprite_yofs), 
+        .bits(car_sprite_bits));
 
-    wire player_vstart = {1'b0, player_x } == vpos;
-    wire player_vstart = {1'b0, player_x } == vpos;
+    // signals for player sprite generator
+    wire player_vstart = {1'b0,player_y} == vpos;
+    wire player_hstart = {1'b0,player_x} == hpos;
     wire player_gfx;
     wire player_is_drawing;
 
-    wire enemy_vstart = {1'b0, enemy_y} == vpos;
-    wire enemy_hstart = {1'b0, enemy_x} == hpos;
+    // signals for enemy sprite generator
+    wire enemy_vstart = {1'b0,enemy_y} == vpos;
+    wire enemy_hstart = {1'b0,enemy_x} == hpos;
     wire enemy_gfx;
     wire enemy_is_drawing;
 
-    spreite_renderer player_renderer(
-        .clk(clk),
-        .vstart(enemy_vstart),
-        .load(enemy_load),
-        .hstart(enemy_hstart),
-        .rom_addr(enemy_sprite_yofs),
-        .rom_bits(car_sprite_bits),
-        .gfx(enemy_gfx),
-        .in_progress(enemy_is_drawing));
-    
+
+    // player sprite generator
+    sprite_renderer player_renderer(
+    .clk(clk),
+    .vstart(player_vstart),
+    .load(player_load),
+    .hstart(player_hstart),
+    .rom_addr(player_sprite_yofs),
+    .rom_bits(car_sprite_bits),
+    .gfx(player_gfx),
+    .in_progress(player_is_drawing));
+
+    // enemy sprite generator
+    sprite_renderer enemy_renderer(
+    .clk(clk),
+    .vstart(enemy_vstart),
+    .load(enemy_load),
+    .hstart(enemy_hstart),
+    .rom_addr(enemy_sprite_yofs),
+    .rom_bits(car_sprite_bits),
+    .gfx(enemy_gfx),
+    .in_progress(enemy_is_drawing));
+
     // signals for enemy bouncing off left/right borders  
     wire enemy_hit_left = (enemy_x == 64);
     wire enemy_hit_right = (enemy_x == 192);
@@ -110,12 +127,6 @@ module raing_game_top
         frame_collision <= 1;
     else if (vsync)
         frame_collision <= 0;
-
-    always @(posedge clk)
-        if(player_gfx && (enemy_gfx || track_gfx))
-            frame_collision <= 1;
-        else if(vsync)
-            frame_collision <= 0;
     
     // track graphics signals
     wire track_offside = (hpos[7:5]==0) || (hpos[7:5]==7);
