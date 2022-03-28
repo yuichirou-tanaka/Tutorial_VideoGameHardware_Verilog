@@ -94,13 +94,11 @@ module DE10_LITE(
 //`define FPGA_EXAMPLE wrapper_ball_paddle
 //`define FPGA_EXAMPLE wrapper_ball_absolute_top
 //`define FPGA_EXAMPLE wrapper_ball_slipcounter_top
-// `define FPGA_EXAMPLE wrapper_tiletest
+//`define FPGA_EXAMPLE wrapper_tiletest
 //`define FPGA_EXAMPLE wrapper_paddle
 //`define FPGA_EXAMPLE wrapper_spritetest
-`define FPGA_EXAMPLE wrapper_spriterender_test
-
-
-
+//`define FPGA_EXAMPLE wrapper_spriterender_test
+`define FPGA_EXAMPLE wrapper_racing_game
 
     `FPGA_EXAMPLE
     `FPGA_EXAMPLE
