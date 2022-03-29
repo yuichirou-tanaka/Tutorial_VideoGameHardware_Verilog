@@ -103,7 +103,7 @@ module raing_game_top
         player_x <= paddle_x;
         player_y <= 180;
         track_pos <= track_pos + {11'b0,speed[7:4]};
-        enemy_y <= enemy_y + {3'b0, speed[7:4]};
+        enemy_y <= enemy_y + {10'b0, speed[7:4]};
         if (enemy_hit_edge)
         enemy_dir <= !enemy_dir;
         if (enemy_dir ^ enemy_hit_edge)
