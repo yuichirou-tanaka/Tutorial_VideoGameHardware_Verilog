@@ -8,16 +8,6 @@ module wrapper_sprite_rotation
     output  wire    [2 : 0]     rgb
 );
     reg [0:0] clk_div;
-    wire    [0 : 0]     left;
-    wire    [0 : 0]     right;
-    wire    [0 : 0]     up;
-    wire    [0 : 0]     down;
-
-    assign left     = keys[0];
-    assign right    = keys[1];
-    assign up       = keys[2];
-    assign down     = keys[3];
-
     always @(posedge clk, posedge reset)
     begin
         if( reset )
