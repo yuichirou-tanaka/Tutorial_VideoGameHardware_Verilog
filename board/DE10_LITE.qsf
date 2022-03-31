@@ -435,6 +435,7 @@ set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
 set_global_assignment -name ENABLE_SIGNALTAP ON
 set_global_assignment -name USE_SIGNALTAP_FILE stp1.stp
+set_global_assignment -name VERILOG_FILE "../fpga-examples/tank.v"
 set_global_assignment -name VERILOG_FILE "../fpga-examples/sprite_rotation.v"
 set_global_assignment -name VERILOG_FILE "../fpga-examples/raing_game_top.v"
 set_global_assignment -name VERILOG_FILE "../fpga-examples/sprite_renderer.v"
@@ -450,6 +451,7 @@ set_global_assignment -name VERILOG_FILE "../fpga-examples/ball_paddle.v"
 set_global_assignment -name VERILOG_FILE "../fpga-examples/digits10.v"
 set_global_assignment -name VERILOG_FILE "../fpga-examples/test_hvsync.v"
 set_global_assignment -name VERILOG_FILE "../fpga-examples/hvsync_generator.v"
+set_global_assignment -name VERILOG_FILE ../Common/wrapper_tank_game.v
 set_global_assignment -name VERILOG_FILE ../Common/wrapper_sprite_rotation.v
 set_global_assignment -name VERILOG_FILE ../Common/wrapper_racing_game.v
 set_global_assignment -name VERILOG_FILE ../Common/wrapper_spriterender_test.v

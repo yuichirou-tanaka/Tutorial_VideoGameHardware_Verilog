@@ -68,14 +68,14 @@ module DE10_LITE(
 
     wire    [0 : 0]     clk;
     wire    [0 : 0]     reset; 
-    wire    [3 : 0]     keys;
+    wire    [7 : 0]     keys;
     wire    [0 : 0]     hsync;
     wire    [0 : 0]     vsync; 
     wire    [2 : 0]     rgb;
 
     assign reset  = ~ KEY[0];
     assign clk    = MAX10_CLK1_50;
-    assign keys   = SW[0 +: 4];
+    assign keys   = SW[0 +: 8];
     assign VGA_HS = hsync;
     assign VGA_VS = vsync;
     assign {VGA_R,VGA_G,VGA_B} = { { 4 { rgb[2] } } , { 4 { rgb[1] } } , { 4 { rgb[0] } } };
@@ -99,7 +99,9 @@ module DE10_LITE(
 //`define FPGA_EXAMPLE wrapper_spritetest
 //`define FPGA_EXAMPLE wrapper_spriterender_test
 //`define FPGA_EXAMPLE wrapper_racing_game
-`define FPGA_EXAMPLE wrapper_sprite_rotation
+//`define FPGA_EXAMPLE wrapper_sprite_rotation
+`define FPGA_EXAMPLE wrapper_tank_game
+
 
     `FPGA_EXAMPLE
     `FPGA_EXAMPLE
