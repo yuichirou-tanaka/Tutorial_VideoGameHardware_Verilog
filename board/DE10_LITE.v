@@ -79,12 +79,12 @@ module DE10_LITE(
     assign VGA_HS = hsync;
     assign VGA_VS = vsync;
     assign {VGA_R,VGA_G,VGA_B} = { { 4 { rgb[2] } } , { 4 { rgb[1] } } , { 4 { rgb[0] } } };
-	 assign HEX0 = 8'b0;
-	 assign HEX1 = 8'b0;
-	 assign HEX2 = 8'b0;
-	 assign HEX3 = 8'b0;
-	 assign HEX4 = 8'b0;
-	 assign HEX5 = 8'b0;
+	 assign HEX0 = 8'b11111111;
+	 assign HEX1 = 8'b11111111;
+	 assign HEX2 = 8'b11111111;
+	 assign HEX3 = 8'b11111111;
+	 assign HEX4 = 8'b11111111;
+	 assign HEX5 = 8'b11111111;
     
 //=======================================================
 //  Structural coding

@@ -222,7 +222,9 @@ module tank_controller(
     input [7:0] sprite_bits,
     output gfx,
     input playfield,
-    input switch_left, switch_right, switch_up
+    input switch_left,
+    input switch_right,
+    input switch_up
 );
     parameter initial_x = 128;
     parameter initial_y = 120;
@@ -280,8 +282,8 @@ module tank_controller(
                 else if (switch_right)
                     player_rot <= player_rot + 1; // turn right
                 if (switch_up) begin
-                    if (player_speed != 15) // max accel
-                    player_speed <= player_speed + 1;
+                    if (player_speed <= 15) // max accel
+                        player_speed <= player_speed + 1;
                 end else
                     player_speed <= 0; // stop
             end
@@ -329,15 +331,10 @@ module tank_controller(
                 player_x_fixed <= player_x_fixed + sin_16x4( player_rot + 8  );
             else
                 player_y_fixed <= player_y_fixed - sin_16x4( player_rot + 12 );
-        end else
-            // forward movement
-            if (vpos[0] < player_speed)
-            begin
-                if (vpos[0])
-                    player_x_fixed <= player_x_fixed + sin_16x4( player_rot + 0  );
-                else
-                    player_y_fixed <= player_y_fixed - sin_16x4( player_rot + 4  );
-            end
+        end else if (7 <= player_speed) begin
+            player_x_fixed <= player_x_fixed + sin_16x4( player_rot + 0  );
+            player_y_fixed <= player_y_fixed - sin_16x4( player_rot + 4  );
+        end
     end
 
 endmodule
