@@ -317,7 +317,6 @@ module tank_controller(
         end
     endfunction
 
-  
     always @(posedge hsync or posedge reset)
     if (reset) begin
         // set initial position
@@ -327,16 +326,17 @@ module tank_controller(
         // collision detected? move backwards
         if (collision_detected && vpos[3:1] == 0) begin
             if (vpos[0])
-                player_x_fixed <= player_x_fixed + 12'(sin_16x4(player_rot+8));
+                player_x_fixed <= player_x_fixed + sin_16x4( player_rot + 8  );
             else
-                player_y_fixed <= player_y_fixed - 12'(sin_16x4(player_rot+12));
+                player_y_fixed <= player_y_fixed - sin_16x4( player_rot + 12 );
         end else
             // forward movement
-            if (vpos < 9'(player_speed)) begin
+            if (vpos[0] < player_speed)
+            begin
                 if (vpos[0])
-                    player_x_fixed <= player_x_fixed + 12'(sin_16x4(player_rot));
+                    player_x_fixed <= player_x_fixed + sin_16x4( player_rot + 0  );
                 else
-                    player_y_fixed <= player_y_fixed - 12'(sin_16x4(player_rot+4));
+                    player_y_fixed <= player_y_fixed - sin_16x4( player_rot + 4  );
             end
     end
 
