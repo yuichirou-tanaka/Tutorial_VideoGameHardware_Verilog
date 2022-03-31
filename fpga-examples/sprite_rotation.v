@@ -292,8 +292,10 @@ module tank_controller(
 
     reg collision_detected;
 
-    always @(posedge clk)
-        if(vstart)
+    always @(posedge clk, posedge reset)
+        if( reset )
+            collision_detected <= 0;
+        else if(vstart)
             collision_detected <= 0;
         else if(collision_gfx)
             collision_detected <= 1;
@@ -355,6 +357,19 @@ module control_test_top(
     wire [15:0] vpos;
     reg [7:0] paddle_x;
     reg [7:0] paddle_y;
+    // walls
+    wire    [0  : 0]    top_wall;
+    wire    [0  : 0]    bottom_wall;
+    wire    [0  : 0]    right_wall;
+    wire    [0  : 0]    left_wall;
+    wire    [0  : 0]    wall_gfx;
+
+    // walls
+    assign top_wall     = vpos < 5;
+    assign bottom_wall  = vpos > 475;
+    assign right_wall   = hpos < 5;
+    assign left_wall    = hpos > 635;
+    assign wall_gfx     = top_wall || bottom_wall || right_wall || left_wall;
 
     hvsync_generator hvsync_gen(
         .clk(clk),
@@ -390,7 +405,7 @@ module control_test_top(
     );
 
     wire tank1_gfx;
-    wire playfield_gfx = hpos[5] && vpos[5];
+    wire playfield_gfx = wall_gfx;
 
     wire r = display_on && tank1_gfx;
     wire g = display_on && tank1_gfx;
