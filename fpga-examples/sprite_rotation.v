@@ -296,21 +296,25 @@ module tank_controller(
         else if(collision_gfx)
             collision_detected <= 1;
 
-    function signed [3:0] sin_16x4;
-        input[3:0] in;
-        integer y;
-        case (in[1:0])	// 4 values per quadrant
-            0: y = 0;
-            1: y = 3;
-            2: y = 5;
-            3: y = 6;
-        endcase            
-        case (in[3:2])	// 4 quadrants
-            0: sin_16x4 = 4'(y);
-            1: sin_16x4 = 4'(7-y);
-            2: sin_16x4 = 4'(-y);
-            3: sin_16x4 = 4'(y-7);
-        endcase
+    function [15:0] sin_16x4 (input [3:0] in);
+        reg [3:0] y;
+        reg [3:0] out;
+        begin
+            case ( in[1:0] )	// 4 values per quadrant
+                0: y = 0;
+                1: y = 3;
+                2: y = 5;
+                3: y = 6;
+                default: y = 0;
+            endcase            
+            case ( in[3 : 2] )	// 4 quadrants
+                0: out = y;
+                1: out = 7-y;
+                2: out = -y;
+                3: out = y-7;
+                default: out = y;
+            endcase
+        end
     endfunction
 
   
@@ -338,14 +342,14 @@ module tank_controller(
 
 endmodule
 
-module control_test_top(clk, reset, hsync, vsync, rgb, switches_p1);
-
-    input clk;
-    input reset;
-    output hsync;
-    output vsync;
-    output [2:0] rgb;
-    input [7:0] switches_p1;
+module control_test_top(
+    input clk,
+    input reset,
+    output hsync,
+    output vsync,
+    output [2:0] rgb,
+    input [7:0] switches_p1
+);
 
     wire displaye_on;
     wire [15:0] hpos;
