@@ -405,7 +405,7 @@ module control_test_top(
     );
 
     wire tank1_gfx;
-    wire playfield_gfx = wall_gfx;
+    wire playfield_gfx = hpos[5] && vpos[5];
 
     wire r = display_on && tank1_gfx;
     wire g = display_on && tank1_gfx;
