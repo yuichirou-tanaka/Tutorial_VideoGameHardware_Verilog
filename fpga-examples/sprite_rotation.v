@@ -136,7 +136,7 @@ module sprite_renderer2(
             ycount <= 0;
             // set a default value (blank) for pixel output
             // note: multiple non-blocking assignments are vendor-specific
-        gfx <= 0;
+            gfx <= 0;
             if (vstart) state <= WAIT_FOR_LOAD;
         end
         WAIT_FOR_LOAD: begin
@@ -332,8 +332,10 @@ module tank_controller(
             else
                 player_y_fixed <= player_y_fixed - sin_16x4( player_rot + 12 );
         end else if (7 <= player_speed) begin
-            player_x_fixed <= player_x_fixed + sin_16x4( player_rot + 0  );
-            player_y_fixed <= player_y_fixed - sin_16x4( player_rot + 4  );
+            if (vpos[0])
+                player_x_fixed <= player_x_fixed + sin_16x4( player_rot + 0  );
+            else
+                player_y_fixed <= player_y_fixed - sin_16x4( player_rot + 4  );
         end
     end
 
